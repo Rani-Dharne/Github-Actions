@@ -1,7 +1,7 @@
 name: test-webhook-call
 on:
-  push:
-    branches: main
+  #push:
+   # branches: main
   repository_dispatch:
     types: [repo:push]
 jobs:

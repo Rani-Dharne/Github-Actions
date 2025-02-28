@@ -1,13 +1,17 @@
-name: Trigger Build
-
+name: test-webhook-call
 on:
-  workflow_dispatch:
-
+  #push:
+   # branches: main
+  repository_dispatch:
+    types: [push]
+    
 jobs:
-  build:
+  check-bats-version:
     runs-on: ubuntu-latest
     steps:
-      - name: Checkout code
-        uses: actions/checkout@v2
-      - name: Run build
-        run: echo "Build triggered from Bitbucket"
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '20'
+      - run: npm install -g bats
+      - run: bats -v   
